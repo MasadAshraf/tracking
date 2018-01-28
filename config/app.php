@@ -176,6 +176,13 @@ return [
 
         Czim\Repository\RepositoryServiceProvider::class,
 
+        /*Image Intervention*/
+        Intervention\Image\ImageServiceProvider::class,
+
+        /*Laravel Datatables*/
+
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -234,6 +241,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
 ];
