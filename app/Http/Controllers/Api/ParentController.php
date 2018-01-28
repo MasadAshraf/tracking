@@ -4,17 +4,19 @@ namespace App\Http\Controllers\Api;
 
 use App\Helper\RestApi;
 use App\Http\Requests\Api\ParentLoginRequest;
+use App\Repositories\DriverRepository;
 use App\Repositories\ParentRepository;
 use App\Http\Controllers\Controller;
 
 class ParentController extends Controller
 {
     //
-    protected $parent;
+    protected $parent,$driver;
 
-    public function __construct(ParentRepository $parent)
+    public function __construct(ParentRepository $parent,DriverRepository $driver)
     {
         $this->parent = $parent;
+        $this->driver = $driver;
     }
 
     public function login(ParentLoginRequest $request)
@@ -23,7 +25,8 @@ class ParentController extends Controller
         try {
             $res = $this->parent->loginParent($postData);
             if ($res) {
-                return RestApi::response($res);
+                $driverRes = $this->driver->getDriverDetailById($res->driver_id);
+                return RestApi::response($driverRes);
             } else {
                 return RestApi::response([], 404, 'Password Do not Match');
             }
